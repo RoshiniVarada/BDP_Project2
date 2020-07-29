@@ -1,35 +1,24 @@
-Logic at the mapper end
+1.Read the input split by line.    
+a b;a c;a d;b a;b c;b d;b e;c a;c b;c d;c e;
+d a;d b;d c;d e;e b;e c;e d;
 
+2.Map the each and every line to the key value pair of first and 
+the second attribute.
+[a b];[a c];[a d];[b a];[b c];[b d];[b e];[c a];[c b];[c d];[c e];
+[d a];[d b];[d c];[d e];[e b];[e c];[e d];
+3.Now it is given as the input to groupby transformation which transform the 
+input to the map function
+('a', ['b', 'c', 'd'])('b', ['a', 'c', 'd', 'e'])('c', ['a', 'b', 'd', 'e'])
+('d', ['a', 'b', 'c', 'e'])('e', ['b', 'c', 'd'])
+4.Now this will be given as an input to the map function where the data is
+ mapped as 
+[( user - one friend), [list of rest of the friends]
+('a-b', ['c', 'd'])('a-c', ['b', 'd'])
+('a-d', ['b', 'c'])('a-b', ['c', 'd', 'e']) etc
 
-1.let i=0,k=i+1 
-2.for every i map with every k and concatenate all the values of friends.
+5.Now inside the reduceby operation again groups by the data by the keys 
+('a-b', ['c', 'd'],['c','d','e')
 
-In this case consider
-
-A->B,C,D	B->A,C,D,E	C->A,B,D,E	D->A,B,C,E	E->B,C,D
-
-3.In this case the keys and values will go as follows.
-
-key=A      //array1[0]
-values=B,C,D      //array1[1]
-key=A-B    //array2[0]
-values=B,C,D,A,C,D,E  //array2[1]
-
-key=A
-values=B,C,D
-key=A-C
-values=B,C,D,A,B,D,E
-
-This happens for every k value inside the i loop
-and for every i till the array length
-
-
-Logic at the reducer end
-
-1.The values obtained from the mapper will be in the following format.Store them into an array
-
-"B,C,D,A,C,D,E".
-
-2.For each value of the array if there is any other value in the array
-
-3.If there is any comon value then append it to the output string.
+6.Now the data is passed inside the reduce function where the data is checked 
+if there is any intersection if there is intersection it will be mapped to key.
+('a-b', ['c', 'd'])
