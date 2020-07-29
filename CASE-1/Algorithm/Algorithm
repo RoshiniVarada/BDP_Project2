@@ -1,0 +1,35 @@
+Logic at the mapper end
+
+
+1.let i=0,k=i+1 
+2.for every i map with every k and concatenate all the values of friends.
+
+In this case consider
+
+A->B,C,D	B->A,C,D,E	C->A,B,D,E	D->A,B,C,E	E->B,C,D
+
+3.In this case the keys and values will go as follows.
+
+key=A      //array1[0]
+values=B,C,D      //array1[1]
+key=A-B    //array2[0]
+values=B,C,D,A,C,D,E  //array2[1]
+
+key=A
+values=B,C,D
+key=A-C
+values=B,C,D,A,B,D,E
+
+This happens for every k value inside the i loop
+and for every i till the array length
+
+
+Logic at the reducer end
+
+1.The values obtained from the mapper will be in the following format.Store them into an array
+
+"B,C,D,A,C,D,E".
+
+2.For each value of the array if there is any other value in the array
+
+3.If there is any comon value then append it to the output string.
