@@ -17,7 +17,7 @@ input to the map function
 ('a-d', ['b', 'c'])('a-b', ['c', 'd', 'e']) etc
 
 5.Now inside the reduceby operation again groups by the data by the keys 
-('a-b', ['c', 'd'],['c','d','e')
+('a-b', ['c', 'd'],['c','d','e'])
 
 6.Now the data is passed inside the reduce function where the data is checked 
 if there is any intersection if there is intersection it will be mapped to key.
